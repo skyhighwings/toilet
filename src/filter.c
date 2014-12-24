@@ -30,6 +30,7 @@
 static void filter_crop(context_t *);
 static void filter_gay(context_t *);
 static void filter_metal(context_t *);
+static void filter_america(context_t *);
 static void filter_flip(context_t *);
 static void filter_flop(context_t *);
 static void filter_180(context_t *);
@@ -48,6 +49,7 @@ const lookup[] =
     { "crop", filter_crop, "crop unused blanks" },
     { "gay", filter_gay, "add a rainbow colour effect" },
     { "metal", filter_metal, "add a metallic colour effect" },
+    { "america", filter_america, "add a patriotic color effect (with color spelled right)" },
     { "flip", filter_flip, "flip horizontally" },
     { "flop", filter_flop, "flip vertically" },
     { "rotate", filter_180, NULL }, /* backwards compatibility */
@@ -180,6 +182,33 @@ static void filter_metal(context_t *cx)
             continue;
 
         i = ((cx->lines + y + x / 8) / 2) % 4;
+        caca_set_color_ansi(cx->torender, palette[i], CACA_TRANSPARENT);
+        caca_put_char(cx->torender, x, y, ch);
+    }
+}
+
+static void filter_america(context_t *cx)
+{
+    static unsigned char const palette[] =
+    {
+        CACA_RED, CACA_WHITE, CACA_BLUE,
+    };
+
+    unsigned int x, y, w, h;
+
+    w = caca_get_canvas_width(cx->torender);
+    h = caca_get_canvas_height(cx->torender);
+
+    for(y = 0; y < h; y++)
+        for(x = 0; x < w; x++)
+    {
+        unsigned long int ch = caca_get_char(cx->torender, x, y);
+        int i;
+
+        if(ch == (unsigned char)' ')
+            continue;
+
+        i = ((cx->lines + y + x / 8) / 2) % 3;
         caca_set_color_ansi(cx->torender, palette[i], CACA_TRANSPARENT);
         caca_put_char(cx->torender, x, y, ch);
     }
