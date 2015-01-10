@@ -336,3 +336,6 @@ static void add_char(unsigned long int ch)
     free(buf);
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

@@ -17,3 +17,6 @@
 extern int export_list(void);
 extern int export_set(context_t *, char const *);
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

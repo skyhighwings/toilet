@@ -245,3 +245,6 @@ static void usage(void)
     printf("%s%s", HELP, USAGE);
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

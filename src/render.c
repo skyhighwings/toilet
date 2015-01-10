@@ -164,3 +164,6 @@ static int render_flush(context_t *cx)
     return 0;
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

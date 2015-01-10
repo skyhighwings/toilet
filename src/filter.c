@@ -277,3 +277,6 @@ static void filter_border(context_t *cx)
     caca_draw_cp437_box(cx->torender, 0, 0, w + 2, h + 2);
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */
