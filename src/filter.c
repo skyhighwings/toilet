@@ -189,27 +189,30 @@ static void filter_metal(context_t *cx)
 
 static void filter_america(context_t *cx)
 {
-    static unsigned char const palette[] =
-    {
-        CACA_RED, CACA_WHITE, CACA_BLUE,
-    };
-
-    unsigned int x, y, w, h;
+    unsigned int x, y, w, h, flag_w, flag_h;
+    unsigned char color;
 
     w = caca_get_canvas_width(cx->torender);
     h = caca_get_canvas_height(cx->torender);
+    flag_w = w * 3 / 7;
+    flag_h = h * 5 / 15;
+    /* flag_w = w; flag_h = h; */
 
     for(y = 0; y < h; y++)
         for(x = 0; x < w; x++)
     {
         unsigned long int ch = caca_get_char(cx->torender, x, y);
-        int i;
 
         if(ch == (unsigned char)' ')
             continue;
 
-        i = ((cx->lines + y + x / 8) / 2) % 3;
-        caca_set_color_ansi(cx->torender, palette[i], CACA_TRANSPARENT);
+        if((x < flag_w) && (y < flag_h))
+            // @todo this really needs to be better.
+            color = ((x + y) % 2 && y % 2) ? CACA_WHITE : CACA_BLUE;
+        else
+            color = (y % 2) ? CACA_WHITE : CACA_RED;
+
+        caca_set_color_ansi(cx->torender, color, CACA_TRANSPARENT);
         caca_put_char(cx->torender, x, y, ch);
     }
 }
