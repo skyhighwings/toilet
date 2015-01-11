@@ -336,3 +336,9 @@ static void add_char(unsigned long int ch)
     free(buf);
 }
 
+<<<<<<< HEAD
+=======
+/*
+ * vim: ts=4 sw=4 expandtab
+ */
+>>>>>>> master

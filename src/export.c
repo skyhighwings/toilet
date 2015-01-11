@@ -55,3 +55,6 @@ int export_set(context_t *cx, char const *format)
     return -1;
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

@@ -82,3 +82,6 @@ static int end_figlet(context_t *cx)
     return caca_canvas_set_figfont(cx->cv, NULL);
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

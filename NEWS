@@ -1,3 +1,6 @@
+unreleased changes:
+ - add new patriotic filter
+
 New in 0.3:
  - most of the code was moved to libcaca
  - terminal width support was fixed

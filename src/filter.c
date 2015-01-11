@@ -30,6 +30,7 @@
 static void filter_crop(context_t *);
 static void filter_gay(context_t *);
 static void filter_metal(context_t *);
+static void filter_america(context_t *);
 static void filter_flip(context_t *);
 static void filter_flop(context_t *);
 static void filter_180(context_t *);
@@ -48,6 +49,7 @@ const lookup[] =
     { "crop", filter_crop, "crop unused blanks" },
     { "gay", filter_gay, "add a rainbow colour effect" },
     { "metal", filter_metal, "add a metallic colour effect" },
+    { "america", filter_america, "add a patriotic color effect (with color spelled right)" },
     { "flip", filter_flip, "flip horizontally" },
     { "flop", filter_flop, "flip vertically" },
     { "rotate", filter_180, NULL }, /* backwards compatibility */
@@ -185,6 +187,36 @@ static void filter_metal(context_t *cx)
     }
 }
 
+static void filter_america(context_t *cx)
+{
+    unsigned int x, y, w, h, flag_w, flag_h;
+    unsigned char color;
+
+    w = caca_get_canvas_width(cx->torender);
+    h = caca_get_canvas_height(cx->torender);
+    flag_w = w * 3 / 7;
+    flag_h = h * 1 / 3;
+    /* flag_w = w; flag_h = h; */
+
+    for(y = 0; y < h; y++)
+        for(x = 0; x < w; x++)
+    {
+        unsigned long int ch = caca_get_char(cx->torender, x, y);
+
+        if(ch == (unsigned char)' ')
+            continue;
+
+        if((x < flag_w) && (y < flag_h))
+            // @todo this really needs to be better.
+            color = ((x + y) % 2 && y % 2) ? CACA_WHITE : CACA_BLUE;
+        else
+            color = (y % 2) ? CACA_WHITE : CACA_RED;
+
+        caca_set_color_ansi(cx->torender, color, CACA_TRANSPARENT);
+        caca_put_char(cx->torender, x, y, ch);
+    }
+}
+
 static void filter_gay(context_t *cx)
 {
     static unsigned char const rainbow[] =
@@ -248,3 +280,6 @@ static void filter_border(context_t *cx)
     caca_draw_cp437_box(cx->torender, 0, 0, w + 2, h + 2);
 }
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */

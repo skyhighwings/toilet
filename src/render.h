@@ -22,3 +22,6 @@ extern int render_stdin(context_t *);
 extern int render_list(context_t *, int, char *[]);
 extern int render_end(context_t *);
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */
