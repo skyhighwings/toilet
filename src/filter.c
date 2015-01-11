@@ -195,7 +195,7 @@ static void filter_america(context_t *cx)
     w = caca_get_canvas_width(cx->torender);
     h = caca_get_canvas_height(cx->torender);
     flag_w = w * 3 / 7;
-    flag_h = h * 5 / 15;
+    flag_h = h * 1 / 3;
     /* flag_w = w; flag_h = h; */
 
     for(y = 0; y < h; y++)
