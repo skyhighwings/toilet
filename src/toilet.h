@@ -42,3 +42,6 @@ struct toilet_context
 
 typedef struct toilet_context context_t;
 
+/*
+ * vim: ts=4 sw=4 expandtab
+ */
